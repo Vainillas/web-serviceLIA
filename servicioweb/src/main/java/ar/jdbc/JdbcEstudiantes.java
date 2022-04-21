@@ -56,8 +56,6 @@ public class JdbcEstudiantes implements Estudiantes {
 		Estudiante e = new Estudiante(nombre, apellido, edad, numeroLegajo, carrera);
 		e.addMaterias(materias);
 
-		System.out.println(e.toString());
-
 	}
 
 }
