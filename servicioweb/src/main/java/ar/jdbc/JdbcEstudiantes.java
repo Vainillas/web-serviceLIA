@@ -30,7 +30,7 @@ public class JdbcEstudiantes implements Estudiantes {
 	}
 
 	@Override
-	public List<Estudiante> estudiantes(int numeroLegajo) {
+	public List<Estudiante> estudiantes(Integer numeroLegajo) {
 		Estudiante e1 = new Estudiante("Joaquin", "Garcia", 27, 213788, "Lic. Sistemas");
 		Estudiante e2 = new Estudiante("Emilio", "Perez", 21, 574841, "Lic. Agrónoma");
 		Estudiante e3 = new Estudiante("Ernesto", "Perez", 42, 321654, "Abogacía");
@@ -42,7 +42,7 @@ public class JdbcEstudiantes implements Estudiantes {
 
 		var estudiantes = List.of(e1, e2, e3);
 
-		if (numeroLegajo == 0)
+		if (numeroLegajo == null || numeroLegajo == 0)
 			return estudiantes;
 
 		return estudiantes.stream().filter((p) -> {

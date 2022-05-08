@@ -69,7 +69,7 @@ public class WebAPIEstudiante {
 		};
 	}
 
-	private Handler traerEstudiantesPorId() {
+	private Handler traerEstudiantesPorIdViejo() {
 		return ctx -> {
 			String numeroLegajo = ctx.queryParam("numeroLegajo");
 			List<Estudiante> estudiantes = this.estudiantes.estudiantes(Integer.parseInt(numeroLegajo));
@@ -95,6 +95,34 @@ public class WebAPIEstudiante {
 			}
 
 			ctx.json(Map.of("result", "success", "materias", list));
+
+		};
+	}
+
+	private Handler traerEstudiantesPorId() {
+		return ctx -> {
+
+			String nroLegajo = ctx.queryParam("numeroLegajo");
+
+			List<Estudiante> estudiantes = new ArrayList<Estudiante>();
+
+			if (nroLegajo != null) {
+				if (!nroLegajo.isBlank() || !nroLegajo.isEmpty()) {
+					estudiantes = this.estudiantes.estudiantes(Integer.parseInt(nroLegajo));
+				} else {
+					estudiantes = this.estudiantes.estudiantes(0);
+				}
+			} else {
+				estudiantes = this.estudiantes.estudiantes(0);
+			}
+
+			var list = new ArrayList<Map<String, Object>>();
+
+			for (Estudiante e : estudiantes) {
+				list.add(e.toMap());
+			}
+
+			ctx.json(Map.of("result", "success", "estudiantes", list));
 
 		};
 	}
